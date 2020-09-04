@@ -9,9 +9,9 @@ import java.util.*;
 public class Main {
 
     /**
-     * @param logic 0£º»ò£» 1£ºÓë£» 3£ºÎÞ¡£
-     * @param value ÊÂ¼þ¡£
-     * @param list µ×²ãÊÂ¼þ¡£
+     * @param logic 0ï¼šæˆ–ï¼› 1ï¼šä¸Žï¼› 3ï¼šæ— ã€‚
+     * @param value äº‹ä»¶ã€‚
+     * @param list åº•å±‚äº‹ä»¶ã€‚
      */
     private static final String json = "{\"logic\":0,\"list\":[{\"logic\":0,\"list\":[{\"logic\":1,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"1\"},{\"logic\":3,\"list\":null,\"value\":\"2\"},{\"logic\":3,\"list\":null,\"value\":\"3\"}],\"value\":\"E3\"},{\"logic\":1,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"3\"},{\"logic\":3,\"list\":null,\"value\":\"4\"}],\"value\":\"E4\"}],\"value\":\"E1\"},{\"logic\":1,\"list\":[{\"logic\":0,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"4\"},{\"logic\":3,\"list\":null,\"value\":\"6\"}],\"value\":\"E5\"},{\"logic\":0,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"5\"},{\"logic\":3,\"list\":null,\"value\":\"6\"}],\"value\":\"E6\"}],\"value\":\"E2\"}],\"value\":\"T\"}";
     private static final ObjectMapper mapper = new ObjectMapper();
