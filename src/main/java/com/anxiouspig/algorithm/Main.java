@@ -13,7 +13,7 @@ public class Main {
      * @param value 事件。
      * @param list 底层事件。
      */
-    private static final String json = "{\"logic\":0,\"list\":[{\"logic\":0,\"list\":[{\"logic\":1,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"1\"},{\"logic\":3,\"list\":null,\"value\":\"2\"},{\"logic\":3,\"list\":null,\"value\":\"3\"}],\"value\":\"E3\"},{\"logic\":1,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"3\"},{\"logic\":3,\"list\":null,\"value\":\"4\"}],\"value\":\"E4\"}],\"value\":\"E1\"},{\"logic\":1,\"list\":[{\"logic\":0,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"4\"},{\"logic\":3,\"list\":null,\"value\":\"6\"}],\"value\":\"E5\"},{\"logic\":0,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"5\"},{\"logic\":3,\"list\":null,\"value\":\"6\"}],\"value\":\"E6\"}],\"value\":\"E2\"}],\"value\":\"T\"}";
+    private static final String json = "{\"logic\":1,\"list\":[{\"logic\":0,\"list\":[{\"logic\":1,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"1\"},{\"logic\":3,\"list\":null,\"value\":\"2\"},{\"logic\":3,\"list\":null,\"value\":\"3\"}],\"value\":\"E3\"},{\"logic\":1,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"3\"},{\"logic\":3,\"list\":null,\"value\":\"4\"}],\"value\":\"E4\"}],\"value\":\"E1\"},{\"logic\":1,\"list\":[{\"logic\":0,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"4\"},{\"logic\":3,\"list\":null,\"value\":\"6\"}],\"value\":\"E5\"},{\"logic\":0,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"5\"},{\"logic\":3,\"list\":null,\"value\":\"6\"}],\"value\":\"E6\"}],\"value\":\"E2\"}],\"value\":\"T\"}";
     private static final ObjectMapper mapper = new ObjectMapper();
     private static List<CutSet> setlist = new ArrayList<>();
 
@@ -32,25 +32,22 @@ public class Main {
             Collections.sort(l);
             sets.add(l);
         });
-        List<List<Integer>> res = new ArrayList<>(sets);
+        List<List<Integer>> res = new ArrayList<>();
         for (int i = 0; i < sets.size(); i++) {
             List<Integer> listI = sets.get(i);
             for (int j = sets.size() - 1; j > i; j--) {
                 List<Integer> listJ = sets.get(j);
-                int iMax = listI.get(listI.size() - 1);
-                int iMin = listI.get(0);
-                int jMax = listJ.get(listJ.size() - 1);
-                int jMin = listJ.get(0);
-                if (iMax > jMax - 1 && iMin < jMin + 1) {
-                    res.remove(listI);
+                if (listJ.containsAll(listI)) {
+                    sets.remove(listJ);
                     continue;
-                } else if (iMax < jMax + 1 && iMin > jMin - 1) {
-                    res.remove(listJ);
-                    continue;
+                } else if (listI.containsAll(listJ)) {
+                    res.add(listI);
+                    break;
                 }
             }
         }
-        return res;
+        sets.removeAll(res);
+        return sets;
     }
 
     private static void recursion(String parent, JsonNode node) {
@@ -90,26 +87,28 @@ public class Main {
                     sets.add(child);
                 }
             }
-            getCombinationRecursion(parent, 0, new ArrayList<>(), sets);
+            List<List<Integer>> lists = new ArrayList<>();
+            getCombinationRecursion(new ArrayList<>(), sets, lists);
+            setlist.add(new CutSet(parent, lists));
         }
     }
 
-    private static void getCombinationRecursion(String parent, int index, List<Integer> list, List<CutSet> sets) {
+    private static void getCombinationRecursion(List<Integer> list, List<CutSet> sets, List<List<Integer>> lists) {
         if (sets.size() == 1) {
             sets.get(0).getList().forEach(i -> {
                 List<Integer> result = new ArrayList<>(list);
                 result.addAll(i);
-                setlist.add(new CutSet(parent, Arrays.asList(result)));
+                lists.add(result);
             });
             return;
         }
         List<CutSet> remain = new ArrayList<>(sets);
-        CutSet set = sets.get(index);
+        CutSet set = sets.get(0);
         remain.remove(set);
         set.getList().forEach(c1 -> {
             List<Integer> result = new ArrayList<>(list);
             result.addAll(c1);
-            getCombinationRecursion(parent, index + 1, result, remain);
+            getCombinationRecursion(result, remain, lists);
         });
     }
 
@@ -118,4 +117,16 @@ public class Main {
         final String parent;
         final List<List<Integer>> list;
     }
+
+//        public static void main(String[] args) {
+//        List<CutSet> sets = new ArrayList<>();
+//        sets.add(new CutSet("1", Arrays.asList(Arrays.asList(1, 2, 3), Arrays.asList(3, 4))));
+//        sets.add(new CutSet("1", Arrays.asList(Arrays.asList(4, 5), Arrays.asList(4, 6),
+//                Arrays.asList(6, 5), Arrays.asList(6, 6))));
+//            List<List<Integer>> lists = new ArrayList<>();
+//            getCombinationRecursion(new ArrayList<>(), sets, lists);
+//            setlist.add(new CutSet("parent", lists));
+//        System.out.println(setlist);
+//    }
+
 }
