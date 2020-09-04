@@ -3,7 +3,7 @@ package com.anxiouspig.algorithm;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
-
+import org.yaml.snakeyaml.Yaml;
 import java.util.*;
 
 public class Main {
@@ -13,11 +13,14 @@ public class Main {
      * @param value 事件。
      * @param list 底层事件。
      */
-    private static final String json = "{\"logic\":1,\"list\":[{\"logic\":0,\"list\":[{\"logic\":1,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"1\"},{\"logic\":3,\"list\":null,\"value\":\"2\"},{\"logic\":3,\"list\":null,\"value\":\"3\"}],\"value\":\"E3\"},{\"logic\":1,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"3\"},{\"logic\":3,\"list\":null,\"value\":\"4\"}],\"value\":\"E4\"}],\"value\":\"E1\"},{\"logic\":1,\"list\":[{\"logic\":0,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"4\"},{\"logic\":3,\"list\":null,\"value\":\"6\"}],\"value\":\"E5\"},{\"logic\":0,\"list\":[{\"logic\":3,\"list\":null,\"value\":\"5\"},{\"logic\":3,\"list\":null,\"value\":\"6\"}],\"value\":\"E6\"}],\"value\":\"E2\"}],\"value\":\"T\"}";
+    private static  String json;
     private static final ObjectMapper mapper = new ObjectMapper();
     private static List<CutSet> setlist = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
+        Yaml yaml = new Yaml();
+        Map map = yaml.loadAs(Main.class.getClassLoader().getResourceAsStream("json.yml"), Map.class);
+        json = mapper.writeValueAsString(map);
         JsonNode jsonNode = mapper.readTree(json);
         recursion(null, jsonNode);
         System.out.println(uniq());
@@ -117,16 +120,5 @@ public class Main {
         final String parent;
         final List<List<Integer>> list;
     }
-
-//        public static void main(String[] args) {
-//        List<CutSet> sets = new ArrayList<>();
-//        sets.add(new CutSet("1", Arrays.asList(Arrays.asList(1, 2, 3), Arrays.asList(3, 4))));
-//        sets.add(new CutSet("1", Arrays.asList(Arrays.asList(4, 5), Arrays.asList(4, 6),
-//                Arrays.asList(6, 5), Arrays.asList(6, 6))));
-//            List<List<Integer>> lists = new ArrayList<>();
-//            getCombinationRecursion(new ArrayList<>(), sets, lists);
-//            setlist.add(new CutSet("parent", lists));
-//        System.out.println(setlist);
-//    }
 
 }

@@ -1,0 +1,39 @@
+logic: 1
+value: T
+list:
+  - logic: 0
+    value: E1
+    list:
+      - logic: 1
+        value: E3
+        list:
+          - logic: 3
+            value: 1
+          - logic: 3
+            value: 2
+          - logic: 3
+            value: 3
+      - logic: 1
+        value: E4
+        list:
+          - logic: 3
+            value: 3
+          - logic: 3
+            value: 4
+  - logic: 1
+    value: E2
+    list:
+      - logic: 0
+        value: E5
+        list:
+          - logic: 3
+            value: 4
+          - logic: 3
+            value: 6
+      - logic: 0
+        value: E6
+        list:
+          - logic: 3
+            value: 5
+          - logic: 3
+            value: 6
