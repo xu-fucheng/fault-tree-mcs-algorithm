@@ -26,6 +26,10 @@ public class Main {
         System.out.println(uniq());
     }
 
+    /**
+     * 去重、排序、求最小割集
+     * @return
+     */
     private static List<List<Integer>> uniq() {
         List<List<Integer>> lists = new ArrayList<>();
         List<List<Integer>> sets = new ArrayList<>();
@@ -53,6 +57,11 @@ public class Main {
         return sets;
     }
 
+    /**
+     * 递归求所有可能的最小割集
+     * @param parent 父节点
+     * @param node 当前节点
+     */
     private static void recursion(String parent, JsonNode node) {
         if (node.get("logic").asInt() == 3) {
             setlist.add(new CutSet(parent, Arrays.asList(Arrays.asList(node.get("value").asInt()))));
@@ -96,6 +105,12 @@ public class Main {
         }
     }
 
+    /**
+     * 与情况下组合排列最小割集
+     * @param list
+     * @param sets
+     * @param lists
+     */
     private static void getCombinationRecursion(List<Integer> list, List<CutSet> sets, List<List<Integer>> lists) {
         if (sets.size() == 1) {
             sets.get(0).getList().forEach(i -> {
