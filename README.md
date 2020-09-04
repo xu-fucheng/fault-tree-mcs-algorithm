@@ -1,4 +1,4 @@
-# ¹ÊÕÏÊ÷ÑùÀı
+# æ•…éšœæ ‘æ ·ä¾‹å›¾
 ![factory](https://zhazige-com.oss-cn-qingdao.aliyuncs.com/data-structure/fault-tree.jpg?x-oss-process=style/watermark)
-# Ëã·¨Á÷³Ì
+# ç®—æ³•æµç¨‹å›¾
 ![factory](https://zhazige-com.oss-cn-qingdao.aliyuncs.com/data-structure/mcs-flow.jpg?x-oss-process=style/watermark)
