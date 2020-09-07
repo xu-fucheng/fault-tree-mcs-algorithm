@@ -8,18 +8,18 @@ list:
         value: E3
         list:
           - logic: 3
-            value: 1
+            value: X1
           - logic: 3
-            value: 2
+            value: X2
           - logic: 3
-            value: 3
+            value: X3
       - logic: 1
         value: E4
         list:
           - logic: 3
-            value: 3
+            value: X3
           - logic: 3
-            value: 4
+            value: X4
   - logic: 1
     value: E2
     list:
@@ -27,13 +27,13 @@ list:
         value: E5
         list:
           - logic: 3
-            value: 4
+            value: X4
           - logic: 3
-            value: 6
-      - logic: 0
+            value: X6
+      - logic: 1
         value: E6
         list:
           - logic: 3
-            value: 5
+            value: X5
           - logic: 3
-            value: 6
+            value: X6
